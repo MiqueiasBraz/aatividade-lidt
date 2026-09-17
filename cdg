@@ -1,0 +1,95 @@
+tarefas = []
+
+
+def adicionar_tarefa():
+    tarefa = input("Digite a nova tarefa: ")
+
+    if tarefa.strip() == "":
+        print("A tarefa não pode estar vazia.")
+    else:
+        tarefas.append(tarefa)
+        print("Tarefa adicionada com sucesso!")
+
+
+def listar_tarefas():
+    if len(tarefas) == 0:
+        print("\nNenhuma tarefa cadastrada.")
+    else:
+        print("\n===== LISTA DE TAREFAS =====")
+
+           
+        for i, tarefa in enumerate(tarefas, start=1):
+            print(f"{i}. {tarefa}")
+
+
+def buscar_tarefa():
+    busca = input("Digite o nome da tarefa que deseja buscar: ")
+
+    encontrada = False
+
+    for tarefa in tarefas:
+        if busca.lower() in tarefa.lower():
+            print(f"Tarefa encontrada: {tarefa}")
+            encontrada = True
+
+    if not encontrada:
+        print("Tarefa não encontrada.")
+
+
+def remover_tarefa():
+    listar_tarefas()
+
+    if len(tarefas) == 0:
+        return
+
+    try:
+        numero = int(input("Digite o número da tarefa que deseja remover: "))
+
+        if numero >= 1 and numero <= len(tarefas):
+            tarefa_removida = tarefas.pop(numero - 1)
+            print(f"Tarefa '{tarefa_removida}' removida com sucesso!")
+        else:
+            print("Número de tarefa inválido.")
+
+    except ValueError:
+        print("Digite apenas um número.")
+
+
+def mostrar_menu():
+    print("\n==============================")
+    print("       LISTA DE TAREFAS")
+    print("==============================")
+    print("1 - Adicionar tarefa")
+    print("2 - Listar tarefas")
+    print("3 - Buscar tarefa")
+    print("4 - Remover tarefa")
+    print("5 - Sair")
+    print("==============================")
+
+
+# Programa principal
+
+while True:
+
+    mostrar_menu()
+
+    opcao = input("Escolha uma opção: ")
+
+    if opcao == "1":
+        adicionar_tarefa()
+
+    elif opcao == "2":
+        listar_tarefas()
+
+    elif opcao == "3":
+        buscar_tarefa()
+
+    elif opcao == "4":
+        remover_tarefa()
+
+    elif opcao == "5":
+        print("Programa encerrado.")
+        break
+
+    else:
+        print("Opção inválida. Escolha uma opção de 1 a 5.")
